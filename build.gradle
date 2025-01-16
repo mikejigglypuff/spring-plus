@@ -66,6 +66,10 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
+
 //kotlin
 allOpen {
     annotation("jakarta.persistence.Entity")
