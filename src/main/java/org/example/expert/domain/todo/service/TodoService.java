@@ -7,6 +7,7 @@ import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.dto.response.TodoSaveResponse;
+import org.example.expert.domain.todo.dto.response.TodoSearchResponse;
 import org.example.expert.domain.todo.entity.Todo;
 import org.example.expert.domain.todo.repository.QueryDslTodoRepository;
 import org.example.expert.domain.todo.repository.TodoRepository;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -87,5 +89,13 @@ public class TodoService {
                 todo.getCreatedAt(),
                 todo.getModifiedAt()
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<TodoSearchResponse> searchTodo(
+        String title, LocalDateTime startCreationTime, LocalDateTime endCreationTime, String nickname
+    ) {
+        return queryDslTodoRepository.findByTitleAndCreatedAtAndNickname(
+            title, startCreationTime, endCreationTime, nickname);
     }
 }
