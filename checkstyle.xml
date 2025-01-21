@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<!--
+    Checkstyle configuration that checks the Google coding conventions from Google Java Style
+    that can be found at https://google.github.io/styleguide/javaguide.html
+
+    Checkstyle is very configurable. Be sure to read the documentation at
+    http://checkstyle.org (or in your downloaded distribution).
+
+    To completely disable a check, just comment it out or delete it from the file.
+    To suppress certain violations please review suppression filters.
+
+    Authors: Max Vetrenko, Mauryan Kansara, Ruslan Diachenko, Roman Ivanov.
+ -->
+
+<module name="Checker">
+
+    <property name="charset" value="UTF-8"/>
+
+    <property name="severity" value="${org.checkstyle.google.severity}" default="warning"/>
+
+    <property name="fileExtensions" value="java, properties, xml"/>
+    <!-- Excludes all 'module-info.java' files              -->
+    <!-- See https://checkstyle.org/filefilters/index.html -->
+    <module name="BeforeExecutionExclusionFileFilter">
+        <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+
+    <module name="SuppressWarningsFilter"/>
+
+    <!-- https://checkstyle.org/filters/suppressionfilter.html -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
+                  default="checkstyle-suppressions.xml" />
+        <property name="optional" value="true"/>
+    </module>
+
+    <!-- https://checkstyle.org/filters/suppresswithnearbytextfilter.html -->
+    <module name="SuppressWithNearbyTextFilter">
+        <property name="nearbyTextPattern"
+                  value="CHECKSTYLE.SUPPRESS\: (\w+) for ([+-]\d+) lines"/>
+        <property name="checkPattern" value="$1"/>
+        <property name="lineRange" value="$2"/>
+    </module>
+
+    <!-- Checks for whitespace                               -->
+    <!-- See http://checkstyle.org/checks/whitespace/index.html -->
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+
+    <module name="LineLength">
+        <property name="fileExtensions" value="java"/>
+        <property name="max" value="100"/>
+        <property name="ignorePattern"
+                  value="^package.*|^import.*|href\s*=\s*&quot;[^&quot;]*&quot;|http://|https://|ftp://"/>
+    </module>
+
+    <module name="TreeWalker">
+        <module name="com.puppycrawl.tools.checkstyle.checks.naming.ClassNameCheck">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+        </module>
+
+        <!-- 클래스 이름에 PascalCase 적용 -->
+        <module name="ClassName">
+            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+        </module>
+
+        <!-- 필드, 메서드 이름에 camelCase 적용 -->
+        <module name="MethodName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+        <module name="LocalVariableName">
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
+        </module>
+
+        <!-- 상수 이름은 모두 대문자로 설정 -->
+        <module name="ConstantName">
+            <property name="format" value="^[A-Z][A-Z0-9_]*$"/>
+        </module>
+
+        <!-- 줄 당 최대 길이 설정 -->
+        <module name="LineLength">
+            <property name="max" value="100"/>
+        </module>
+
+        <!-- 4칸 들여쓰기 적용 -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="tabWidth" value="4"/>
+            <property name="lineWrappingIndentation" value="4"/>
+        </module>
+
+        <!-- 연산자 등의 앞뒤에 공백 적용 -->
+        <module name="WhitespaceAfter"/>
+        <module name="WhitespaceAround"/>
+
+        <!-- K&R 중괄호 스타일 적용 -->
+        <module name="NeedBraces"/>
+        <module name="LeftCurly">
+            <property name="option" value="eol"/>
+        </module>
+
+        <!-- 패키지명은 소문자 및 숫자로만 작성할 것 -->
+        <module name="PackageName">
+            <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>
+        </module>
+
+        <!-- 기본 접근자 사용 제한 -->
+        <module name="VisibilityModifier">
+            <property name="default" value="private"/>
+        </module>
+
+        <!-- 기본 import에서 * 사용 제한 -->
+        <module name="AvoidStarImport">
+            <property name="allow" value="false"/>
+        </module>
+
+        <!-- static import에서 * 사용 허용 -->
+        <module name="CustomImportOrder">
+            <property name="order" value="java,javax,^,com,org"/>
+            <property name="separated" value="true"/>
+            <property name="separateStatic" value="true"/>
+        </module>
+    </module>
+</module>

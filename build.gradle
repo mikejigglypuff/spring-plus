@@ -67,8 +67,8 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-java-parameters"
+compileJava {
+    options.compilerArgs << '-parameters'
 }
 
 //kotlin
