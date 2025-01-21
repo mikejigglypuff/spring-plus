@@ -2,6 +2,8 @@ package org.example.expert.domain.user.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.expert.domain.common.dto.AuthUser;
+import org.example.expert.domain.common.util.ExtensionUtil;
+import org.example.expert.domain.common.util.FileUtil;
 import org.example.expert.domain.user.service.UserMultipartService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -30,7 +32,7 @@ public class MultipartUserController {
     public ResponseEntity<InputStreamResource> downloadMultipartFile(@PathVariable String filename){
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .contentType(MediaType.valueOf(ExtensionUtil.getMimeTypeForExtension(FileUtil.getFileExtension(filename))))
             .body(service.downloadImage(filename));
     }
 }
