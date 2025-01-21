@@ -8,6 +8,7 @@ import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +41,11 @@ public class UserMultipartService {
         amazonS3.putObject(putObjectRequest);
 
         return changeProfile(userId, getPublicUrl(fileName));
+    }
+
+    public InputStreamResource downloadImage(String fileName) {
+        return new InputStreamResource(
+            amazonS3.getObject(bucket, fileName).getObjectContent());
     }
 
     protected String changeProfile(long userId, String url) {
