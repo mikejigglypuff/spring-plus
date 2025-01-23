@@ -61,7 +61,6 @@ public class UserBulkInsertService {
             user.setModifiedAt(dateTime);
 
             users.add(user);
-            log.info(user.toString());
         }
         return users;
     }
