@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -22,6 +24,11 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResponse>> getUserByNickname(@RequestParam String nickname) {
+        return ResponseEntity.ok(userService.getUserByNickname(nickname));
+    }
+
     @PutMapping("/users")
     public void changePassword(
         @AuthenticationPrincipal AuthUser authUser, @RequestBody UserChangePasswordRequest userChangePasswordRequest
@@ -30,8 +37,8 @@ public class UserController {
     }
 
     @PostMapping("/users/bulk/{repeats}")
-    public ResponseEntity<String> insertBulkUser(@PathVariable long repeats) {
-        bulkInsertService.batchInsert(repeats);
+    public ResponseEntity<String> insertBulkUser(@PathVariable int repeats) {
+        bulkInsertService.batchInsert(repeats, 1000);
         return ResponseEntity.ok("created " + repeats + " users");
     }
 }

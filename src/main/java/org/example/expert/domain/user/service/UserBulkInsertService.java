@@ -1,6 +1,7 @@
 package org.example.expert.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.expert.config.PasswordEncoder;
 import org.example.expert.domain.user.entity.User;
 import org.example.expert.domain.user.enums.UserRole;
@@ -16,29 +17,37 @@ import static org.example.expert.domain.common.util.StringUtil.generateRandomStr
 
 // 더 빠른 Bulk Insert를 수행하기 위해 JDBC 도입
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserBulkInsertService {
     private final JdbcTemplate jdbcTemplate;
     private final PasswordEncoder encoder;
 
-    public void batchInsert(long repeats) {
-        jdbcTemplate.batchUpdate(
-            "INSERT INTO users (email, password, user_role, nickname, created_at, modified_at) " +
-                "VALUES (?, ?, ?, ?, ?, ?)",
-            createUserList(repeats),
-            1000,
-            (ps, entity) -> {
-                ps.setString(1, entity.getEmail());
-                ps.setString(2, entity.getPassword());
-                ps.setString(3, entity.getUserRole().getRole());
-                ps.setString(4, entity.getNickname());
-                ps.setTimestamp(5, Timestamp.valueOf(entity.getCreatedAt()));
-                ps.setTimestamp(6, Timestamp.valueOf(entity.getModifiedAt()));
-            }
-        );
+    public void batchInsert(int repeats, int batchSize) {
+        List<User> users = createUserList(repeats);
+
+        for(int i = 0; i < repeats; i += batchSize) {
+            List<User> batchList = users.subList(i, Math.min(repeats, i + batchSize));
+            jdbcTemplate.batchUpdate(
+                "INSERT INTO users (email, password, user_role, nickname, created_at, modified_at) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)",
+                batchList,
+                batchSize,
+                (ps, entity) -> {
+                    ps.setString(1, entity.getEmail());
+                    ps.setString(2, entity.getPassword());
+                    ps.setString(3, entity.getUserRole().getRole());
+                    ps.setString(4, entity.getNickname());
+                    ps.setTimestamp(5, Timestamp.valueOf(entity.getCreatedAt()));
+                    ps.setTimestamp(6, Timestamp.valueOf(entity.getModifiedAt()));
+                }
+            );
+
+            log.info("inserted {} Users", batchSize);
+        }
     }
 
-    private List<User> createUserList(long repeats) {
+    private List<User> createUserList(int repeats) {
         List<User> users = new ArrayList<>();
         for(int i = 0; i < repeats; i++) {
             LocalDateTime dateTime = LocalDateTime.now();
@@ -52,6 +61,7 @@ public class UserBulkInsertService {
             user.setModifiedAt(dateTime);
 
             users.add(user);
+            log.info(user.toString());
         }
         return users;
     }
