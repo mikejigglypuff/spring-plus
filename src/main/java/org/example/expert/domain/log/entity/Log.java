@@ -11,7 +11,7 @@ import org.example.expert.domain.manager.dto.request.ManagerSaveRequest;
 @NoArgsConstructor
 @Table(name = "log")
 public class Log extends Timestamped {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @Column
