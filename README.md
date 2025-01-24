@@ -25,3 +25,23 @@
 
 </details>
 
+### 동등 조건 조회 최적화
+
+0. 최적화 전
+![최적화 전](/doc/img/최적화%20전%20닉네임%20기반%20유저%20조회%20속도.png)
+
+
+1. B- Tree Index 도입 후
+![B-Tree](/doc/img/b-tree%20적용.png)
+
+
+2. B- Tree Index + Adaptive Hash Index 도입 후
+![B-Tree&AHI](/doc/img/b-tree%20&%20ahi%20적용.png)
+
+
+3. FullText Index 도입 후
+![FullText](/doc/img/fulltext%20적용.png)
+
+
+4. FullText Index + Adaptive Hash Index 도입 후
+![FullText&AHI](/doc/img/fulltext%20index%20&%20ahi%20적용.png)

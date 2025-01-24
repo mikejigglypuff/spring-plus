@@ -43,7 +43,7 @@ public class UserBulkInsertService {
                 }
             );
 
-            log.info("inserted {} Users", batchSize);
+            log.info("inserted {} Users", Math.min(batchSize, repeats - i));
         }
     }
 
@@ -52,7 +52,7 @@ public class UserBulkInsertService {
         for(int i = 0; i < repeats; i++) {
             LocalDateTime dateTime = LocalDateTime.now();
             User user = new User(
-                generateRandomString(8),
+                generateRandomString(10),
                 generateRandomString(6) + "@" + generateRandomString(6) + ".com",
                 encoder.encode(generateRandomString(10)),
                 UserRole.ROLE_USER
