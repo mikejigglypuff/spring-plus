@@ -21,7 +21,15 @@ class Manager(// 일정 만든 사람 id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private val id: Long? = null
 
-    fun getId() : Long? { return id }
-    fun getUser() : User { return user }
-    fun getTodo() : Todo { return todo }
+    fun getId(): Long? {
+        return id
+    }
+
+    fun getUser(): User {
+        return user
+    }
+
+    fun getTodo(): Todo {
+        return todo
+    }
 }

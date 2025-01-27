@@ -22,12 +22,12 @@ public class SecurityConfig {
             .httpBasic(AbstractHttpConfigurer::disable)
             .formLogin(AbstractHttpConfigurer::disable)
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-            .exceptionHandling((exception)-> exception.accessDeniedHandler(customAccessDeniedHandler))
+            .exceptionHandling((exception) -> exception.accessDeniedHandler(customAccessDeniedHandler))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**", "/health/**", "/users/bulk/**").permitAll()
                 .requestMatchers("/todos/**", "/users/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-        ).build();
+            ).build();
     }
 }

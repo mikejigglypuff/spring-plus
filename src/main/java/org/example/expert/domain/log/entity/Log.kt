@@ -1,7 +1,6 @@
 package org.example.expert.domain.log.entity
 
 import jakarta.persistence.*
-import lombok.Getter
 import lombok.NoArgsConstructor
 import org.example.expert.domain.common.entity.Timestamped
 import org.example.expert.domain.manager.dto.request.ManagerSaveRequest
@@ -27,7 +26,15 @@ class Log(
         }
     }
 
-    fun getId() : Long? { return id }
-    fun getRequestBody() : String { return requestBody }
-    fun getErrorMessage() : String { return errorMessage }
+    fun getId(): Long? {
+        return id
+    }
+
+    fun getRequestBody(): String {
+        return requestBody
+    }
+
+    fun getErrorMessage(): String {
+        return errorMessage
+    }
 }

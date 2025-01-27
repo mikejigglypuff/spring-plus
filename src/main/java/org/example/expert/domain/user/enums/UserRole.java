@@ -20,9 +20,9 @@ public enum UserRole {
 
     public static UserRole of(String role) {
         return Arrays.stream(UserRole.values())
-                .filter(r -> r.getRole().equalsIgnoreCase(role))
-                .findFirst()
-                .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UserRole"));
+            .filter(r -> r.getRole().equalsIgnoreCase(role))
+            .findFirst()
+            .orElseThrow(() -> new InvalidRequestException("유효하지 않은 UserRole"));
     }
 
     public static List<GrantedAuthority> getAuthority() {

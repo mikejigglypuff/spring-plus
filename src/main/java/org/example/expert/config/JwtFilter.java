@@ -63,9 +63,9 @@ public class JwtFilter implements Filter {
                 UserRole.getAuthority(),
                 new AuthUser(
                     Long.parseLong(claims.getSubject()),
-                    (String)claims.get("nickname"),
-                    (String)claims.get("email"),
-                    UserRole.of((String)claims.get("userRole"))
+                    (String) claims.get("nickname"),
+                    (String) claims.get("email"),
+                    UserRole.of((String) claims.get("userRole"))
                 )
             ));
 

@@ -19,9 +19,19 @@ abstract class Timestamped {
     @Temporal(TemporalType.TIMESTAMP)
     private var modifiedAt: LocalDateTime? = null
 
-    fun getCreatedAt() : LocalDateTime? { return createdAt }
-    fun getModifiedAt() : LocalDateTime? { return modifiedAt }
+    fun getCreatedAt(): LocalDateTime? {
+        return createdAt
+    }
 
-    fun setCreatedAt(createdAt : LocalDateTime?) : Unit { this.createdAt = createdAt }
-    fun setModifiedAt(modifiedAt : LocalDateTime?) : Unit { this.createdAt = modifiedAt }
+    fun getModifiedAt(): LocalDateTime? {
+        return modifiedAt
+    }
+
+    fun setCreatedAt(createdAt: LocalDateTime?): Unit {
+        this.createdAt = createdAt
+    }
+
+    fun setModifiedAt(modifiedAt: LocalDateTime?): Unit {
+        this.createdAt = modifiedAt
+    }
 }

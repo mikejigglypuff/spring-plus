@@ -1,7 +1,6 @@
 package org.example.expert.domain.comment.entity
 
 import jakarta.persistence.*
-import lombok.Getter
 import lombok.NoArgsConstructor
 import org.example.expert.domain.common.entity.Timestamped
 import org.example.expert.domain.todo.entity.Todo
@@ -24,8 +23,19 @@ class Comment(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private val id: Long? = null
 
-    fun getContents() : String { return contents }
-    fun getId() : Long? { return id }
-    fun getUser() : User { return user }
-    fun getTodo() : Todo { return todo }
+    fun getContents(): String {
+        return contents
+    }
+
+    fun getId(): Long? {
+        return id
+    }
+
+    fun getUser(): User {
+        return user
+    }
+
+    fun getTodo(): Todo {
+        return todo
+    }
 }

@@ -39,12 +39,29 @@ class User : Timestamped {
         this.userRole = userRole
     }
 
-    fun getId() : Long? { return id }
-    fun getNickname() : String { return nickname }
-    fun getEmail() : String { return email }
-    fun getPassword() : String? { return password }
-    fun getUserRole() : UserRole { return userRole }
-    fun getProfileUrl() : String? { return profileUrl }
+    fun getId(): Long? {
+        return id
+    }
+
+    fun getNickname(): String {
+        return nickname
+    }
+
+    fun getEmail(): String {
+        return email
+    }
+
+    fun getPassword(): String? {
+        return password
+    }
+
+    fun getUserRole(): UserRole {
+        return userRole
+    }
+
+    fun getProfileUrl(): String? {
+        return profileUrl
+    }
 
     fun addProfile(profileUrl: String?) {
         this.profileUrl = profileUrl

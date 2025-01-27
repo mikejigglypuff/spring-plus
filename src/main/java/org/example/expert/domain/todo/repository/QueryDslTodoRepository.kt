@@ -55,10 +55,18 @@ class QueryDslTodoRepository(em: EntityManager) {
         nickname: String?
     ): BooleanBuilder {
         val booleanBuilder = BooleanBuilder()
-        if (!title.isNullOrEmpty()) { booleanBuilder.and(todo.title.contains(title)) }
-        if (startCreationTime != null) { booleanBuilder.and(todo.createdAt.after(startCreationTime)) }
-        if (endCreationTime != null) { booleanBuilder.and(todo.createdAt.before(endCreationTime)) }
-        if (!nickname.isNullOrEmpty()) { booleanBuilder.and(todo.user.nickname.contains(nickname)) }
+        if (!title.isNullOrEmpty()) {
+            booleanBuilder.and(todo.title.contains(title))
+        }
+        if (startCreationTime != null) {
+            booleanBuilder.and(todo.createdAt.after(startCreationTime))
+        }
+        if (endCreationTime != null) {
+            booleanBuilder.and(todo.createdAt.before(endCreationTime))
+        }
+        if (!nickname.isNullOrEmpty()) {
+            booleanBuilder.and(todo.user.nickname.contains(nickname))
+        }
 
         return booleanBuilder
     }

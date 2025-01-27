@@ -29,7 +29,7 @@ public class MultipartUserController {
     }
 
     @GetMapping("/download/{filename}")
-    public ResponseEntity<InputStreamResource> downloadMultipartFile(@PathVariable String filename){
+    public ResponseEntity<InputStreamResource> downloadMultipartFile(@PathVariable String filename) {
         return ResponseEntity.ok()
             .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
             .contentType(MediaType.valueOf(ExtensionUtil.getMimeTypeForExtension(FileUtil.getFileExtension(filename))))

@@ -1,29 +1,15 @@
-<?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
         "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
         "https://checkstyle.org/dtds/configuration_1_3.dtd">
-
-<!--
-    Checkstyle configuration that checks the Google coding conventions from Google Java Style
-    that can be found at https://google.github.io/styleguide/javaguide.html
-
-    Checkstyle is very configurable. Be sure to read the documentation at
-    http://checkstyle.org (or in your downloaded distribution).
-
-    To completely disable a check, just comment it out or delete it from the file.
-    To suppress certain violations please review suppression filters.
-
-    Authors: Max Vetrenko, Mauryan Kansara, Ruslan Diachenko, Roman Ivanov.
- -->
 
 <module name="Checker">
 
     <property name="charset" value="UTF-8"/>
 
-    <property name="severity" value="${org.checkstyle.google.severity}" default="warning"/>
+    <property name="severity" value="warning"/>
 
     <property name="fileExtensions" value="java, properties, xml"/>
-    <!-- Excludes all 'module-info.java' files              -->
+    <!-- Excludes all 'module-info.java' files             -->
     <!-- See https://checkstyle.org/filefilters/index.html -->
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="module\-info\.java$"/>
@@ -33,8 +19,7 @@
 
     <!-- https://checkstyle.org/filters/suppressionfilter.html -->
     <module name="SuppressionFilter">
-        <property name="file" value="${org.checkstyle.google.suppressionfilter.config}"
-                  default="checkstyle-suppressions.xml" />
+        <property name="file" value="checkstyle-suppressions.xml"/>
         <property name="optional" value="true"/>
     </module>
 
@@ -60,13 +45,11 @@
     </module>
 
     <module name="TreeWalker">
-        <module name="com.puppycrawl.tools.checkstyle.checks.naming.ClassNameCheck">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
-        </module>
+        <module name="ClassTypeParameterName" />
 
         <!-- 클래스 이름에 PascalCase 적용 -->
-        <module name="ClassName">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
+        <module name="TypeName">
+            <property name="format" value="^[A-Z](_?[a-zA-Z0-9]+)*$"/>
         </module>
 
         <!-- 필드, 메서드 이름에 camelCase 적용 -->
@@ -76,21 +59,18 @@
         <module name="LocalVariableName">
             <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
         </module>
+        <module name="LocalFinalVariableName"/>
+        <module name="StaticVariableName"/>
+        <module name="ParameterName"/>
 
         <!-- 상수 이름은 모두 대문자로 설정 -->
         <module name="ConstantName">
             <property name="format" value="^[A-Z][A-Z0-9_]*$"/>
         </module>
 
-        <!-- 줄 당 최대 길이 설정 -->
-        <module name="LineLength">
-            <property name="max" value="100"/>
-        </module>
-
         <!-- 4칸 들여쓰기 적용 -->
         <module name="Indentation">
             <property name="basicOffset" value="4"/>
-            <property name="tabWidth" value="4"/>
             <property name="lineWrappingIndentation" value="4"/>
         </module>
 
@@ -98,8 +78,9 @@
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround"/>
 
-        <!-- K&R 중괄호 스타일 적용 -->
+        <!-- 코드 블록에 대해 항상 중괄호 요구 -->
         <module name="NeedBraces"/>
+        <!-- K&R 중괄호 스타일 적용 -->
         <module name="LeftCurly">
             <property name="option" value="eol"/>
         </module>
@@ -111,19 +92,14 @@
 
         <!-- 기본 접근자 사용 제한 -->
         <module name="VisibilityModifier">
-            <property name="default" value="private"/>
+            <property name="packageAllowed" value="false"/>
         </module>
 
         <!-- 기본 import에서 * 사용 제한 -->
         <module name="AvoidStarImport">
-            <property name="allow" value="false"/>
+            <property name="allowClassImports" value="false"/>
+            <property name="allowStaticMemberImports" value="true"/>
         </module>
 
-        <!-- static import에서 * 사용 허용 -->
-        <module name="CustomImportOrder">
-            <property name="order" value="java,javax,^,com,org"/>
-            <property name="separated" value="true"/>
-            <property name="separateStatic" value="true"/>
-        </module>
     </module>
 </module>

@@ -25,6 +25,6 @@ public class AdminAccessLoggingAspect {
         LocalDateTime requestTime = LocalDateTime.now();
 
         log.info("Admin Access Log - User ID: {}, Request Time: {}, Request URL: {}, Method: {}",
-                userId, requestTime, requestUrl, joinPoint.getSignature().getName());
+            userId, requestTime, requestUrl, joinPoint.getSignature().getName());
     }
 }

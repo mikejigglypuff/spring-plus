@@ -8,22 +8,17 @@ import java.io.File;
 @Getter
 public class ServerHealth {
 
-    private final String serverStatus = "OK";
-
-    private final double freeDiskGb;
-    private final double totalDiskGb;
-
-    private final double freeMemoryGb;
-    private final double totalMemoryGb;
-
-    private final double freeJvmMemoryMb;
-    private final double totalJvmMemoryMb;
-
-    private final boolean dbConnected;
-
     private static final double GB = Math.pow(1024, 3);
     private static final double MB = Math.pow(1024, 2);
     private static final int FLOATING_POINT = (int) Math.pow(10, 2);
+    private final String serverStatus = "OK";
+    private final double freeDiskGb;
+    private final double totalDiskGb;
+    private final double freeMemoryGb;
+    private final double totalMemoryGb;
+    private final double freeJvmMemoryMb;
+    private final double totalJvmMemoryMb;
+    private final boolean dbConnected;
 
     public ServerHealth(boolean dbConnected, File file, Runtime runtime, OperatingSystemMXBean osBean) {
         this.freeDiskGb = getByteFloatingPoint(file.getFreeSpace(), GB);

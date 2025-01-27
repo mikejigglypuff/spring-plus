@@ -33,11 +33,31 @@ class Todo(
         managers.add(Manager(user, this))
     }
 
-    fun getTitle() : String { return title }
-    fun getContents() : String { return contents }
-    fun getWeather() : String { return weather }
-    fun getUser() : User { return user }
-    fun getId() : Long? { return id }
-    fun getComments() : List<Comment> { return comments }
-    fun getManagers() : MutableList<Manager> { return managers}
+    fun getTitle(): String {
+        return title
+    }
+
+    fun getContents(): String {
+        return contents
+    }
+
+    fun getWeather(): String {
+        return weather
+    }
+
+    fun getUser(): User {
+        return user
+    }
+
+    fun getId(): Long? {
+        return id
+    }
+
+    fun getComments(): List<Comment> {
+        return comments
+    }
+
+    fun getManagers(): MutableList<Manager> {
+        return managers
+    }
 }
